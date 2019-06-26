@@ -216,7 +216,7 @@ class FightingiceEnv_Data_Frameskip(gym.Env):
 
 
 if __name__ == "__main__":
-    env = gym.make("FightingiceDataFrameskip-v0", java_env_path="/home/myt/FTG4.30")
+    env = gym.make("FightingiceDataFrameskip-v0", java_env_path="/home/usen_name/FTG4.40")
 
     # env = FightingiceEnv_Data_Frameskip()
 

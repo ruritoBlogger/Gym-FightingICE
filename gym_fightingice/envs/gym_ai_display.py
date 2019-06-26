@@ -47,9 +47,10 @@ class GymAIDisplay(object):
     def getScreenData(self, sd):
         self.screenData = sd
 
-    def getInformation(self, frameData):
+    def getInformation(self, frameData, isControl):
         self.pre_framedata = frameData if self.pre_framedata is None else self.frameData
         self.frameData = frameData
+        self.isControl = isControl
         self.cc.setFrameData(self.frameData, self.player)
         if frameData.getEmptyFlag():
             return
@@ -68,6 +69,8 @@ class GymAIDisplay(object):
         if self.frameskip:
             if self.cc.getSkillFlag():
                 self.inputKey = self.cc.getSkillKey()
+                return
+            if not self.isControl:
                 return
 
             self.inputKey.empty()
