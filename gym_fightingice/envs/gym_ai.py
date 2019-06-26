@@ -127,15 +127,18 @@ class GymAI(object):
         my = self.frameData.getCharacter(self.player)
         opp = self.frameData.getCharacter(not self.player)
 
-        myHp = abs(my.getHp() / 500)
+        # my information
+        myHp = abs(my.getHp() / 400)
         myEnergy = my.getEnergy() / 300
         myX = ((my.getLeft() + my.getRight()) / 2) / 960
         myY = ((my.getBottom() + my.getTop()) / 2) / 640
         mySpeedX = my.getSpeedX() / 15
         mySpeedY = my.getSpeedY() / 28
         myState = my.getAction().ordinal()
+        myRemainingFrame = my.getRemainingFrame() / 70
 
-        oppHp = abs(opp.getHp() / 500)
+        # opp information
+        oppHp = abs(opp.getHp() / 400)
         oppEnergy = opp.getEnergy() / 300
         oppX = ((opp.getLeft() + opp.getRight()) / 2) / 960
         oppY = ((opp.getBottom() + opp.getTop()) / 2) / 640
@@ -144,7 +147,12 @@ class GymAI(object):
         oppState = opp.getAction().ordinal()
         oppRemainingFrame = opp.getRemainingFrame() / 70
 
+        # time information
+        game_frame_num = self.frameData.getFramesNumber() / 3600
+
         observation = []
+
+        # my information
         observation.append(myHp)
         observation.append(myEnergy)
         observation.append(myX)
@@ -164,7 +172,9 @@ class GymAI(object):
                 observation.append(1)
             else:
                 observation.append(0)
+        observation.append(myRemainingFrame)
 
+        # opp information
         observation.append(oppHp)
         observation.append(oppEnergy)
         observation.append(oppX)
@@ -185,6 +195,9 @@ class GymAI(object):
             else:
                 observation.append(0)
         observation.append(oppRemainingFrame)
+
+        # time information
+        observation.append(game_frame_num)
 
         myProjectiles = self.frameData.getProjectilesByP1()
         oppProjectiles = self.frameData.getProjectilesByP2()
