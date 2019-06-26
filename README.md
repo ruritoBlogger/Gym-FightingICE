@@ -56,7 +56,7 @@ Then, download FightingICE from http://www.ice.ci.ritsumei.ac.jp/~ftgaic/index-2
 # Usage
 Set java_env_path when calling gym.make(), for example:
 ```python
-env = gym.make("FightingiceDataNoFrameskip-v0", java_env_path="/home/your_user_name/FTG4.30")
+env = gym.make("FightingiceDataNoFrameskip-v0", java_env_path="/home/your_user_name/FTG4.40")
 ``` 
 or start your script in the FightingICE installed path or just change the defualt value in the source code.
 
