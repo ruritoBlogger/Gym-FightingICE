@@ -134,7 +134,8 @@ class GymAI(object):
         myY = ((my.getBottom() + my.getTop()) / 2) / 640
         mySpeedX = my.getSpeedX() / 15
         mySpeedY = my.getSpeedY() / 28
-        myState = my.getAction().ordinal()
+        myCurrentAction = my.getAction().ordinal()
+        myState = my.getState().ordinal()
         myRemainingFrame = my.getRemainingFrame() / 70
 
         # opp information
@@ -144,7 +145,8 @@ class GymAI(object):
         oppY = ((opp.getBottom() + opp.getTop()) / 2) / 640
         oppSpeedX = opp.getSpeedX() / 15
         oppSpeedY = opp.getSpeedY() / 28
-        oppState = opp.getAction().ordinal()
+        oppCurrentAction = opp.getAction().ordinal()
+        oppState = opp.getState().ordinal()
         oppRemainingFrame = opp.getRemainingFrame() / 70
 
         # time information
@@ -168,8 +170,13 @@ class GymAI(object):
             observation.append(1)
         observation.append(abs(mySpeedY))
 
-        # NOTE: myStateと一致するものを1にするよりか数値化した方が良いため
+        # NOTE: myCurrentActionと一致するものを1にするよりか数値化した方が良いため
+        #       またmyStateからrenameした(中身はActionなので)
+        observation.append(myCurrentAction)
+        
+        # CHANGED: 現在のstateを追加(getStateの中身)
         observation.append(myState)
+
         observation.append(myRemainingFrame)
 
         # opp information
@@ -189,7 +196,12 @@ class GymAI(object):
         observation.append(abs(oppSpeedY))
         
         # NOTE: oppStateと一致するものを1にするよりか数値化した方が良いため
+        #       またoppStateからrenameした(中身はActionなので)
+        observation.append(oppCurrentAction)
+ 
+        # CHANGED: 現在のstateを追加(getStateの中身)
         observation.append(oppState)
+
         observation.append(oppRemainingFrame)
 
         # time information
