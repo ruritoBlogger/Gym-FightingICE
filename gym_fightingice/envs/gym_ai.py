@@ -167,11 +167,9 @@ class GymAI(object):
         else:
             observation.append(1)
         observation.append(abs(mySpeedY))
-        for i in range(56):
-            if i == myState:
-                observation.append(1)
-            else:
-                observation.append(0)
+
+        # NOTE: myStateと一致するものを1にするよりか数値化した方が良いため
+        observation.append(myState)
         observation.append(myRemainingFrame)
 
         # opp information
@@ -189,11 +187,9 @@ class GymAI(object):
         else:
             observation.append(1)
         observation.append(abs(oppSpeedY))
-        for i in range(56):
-            if i == oppState:
-                observation.append(1)
-            else:
-                observation.append(0)
+        
+        # NOTE: oppStateと一致するものを1にするよりか数値化した方が良いため
+        observation.append(oppState)
         observation.append(oppRemainingFrame)
 
         # time information
